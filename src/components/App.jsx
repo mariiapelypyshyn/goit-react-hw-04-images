@@ -18,6 +18,7 @@ const App = () => {
   const handleSubmit = inputData => {
     setInputData(inputData);
     setItems([]);
+    setPage(1);
   }
 
   useEffect(() => {
