@@ -16,60 +16,42 @@ const App = () => {
   const [totalHits, setTotalHits] = useState(0);
 
   const handleSubmit = inputData => {
-    // this.setState({ inputData, page: 1 });
     setInputData(inputData);
+    setItems([]);
   }
 
   useEffect(() => {
     if (!inputData)
-      return; 
+     { return;} 
     
     const getImgs = async () => {
     try {
-      // this.setState({ status: 'pending' });
       setStatus('pending');
       const result = await fetchImages(inputData, page)
      
       if (result.hits.length < 1) {
-        // this.setState({ status: 'idle' });
         setStatus('idle');
         Notiflix.Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         );
       } else {
-      //   this.setState(prevState => ({
-      //     items: [...prevState.items, ...result.hits],
-      //     totalHits: result.totalHits,
-      //   status: 'resolved',
-        // }));
-  
         setItems(prevState => [...prevState, ...result.hits]);
         setTotalHits(result.totalHits);
         setStatus('resolved');
       }
     } catch (error) {
-      // this.setState({ status: 'rejected' });
        setStatus('rejected');
     }
     };
     
     getImgs();
   }, [inputData, page]);
-  // componentDidUpdate(_, prevState) {
-  //   if (prevState.inputData !== this.state.inputData || prevState.page !== this.state.page) {
-  //     this.getImgs();
-  //   }
-  // };
+
   
   const onNextPage = () => {
-    // this.setState(prevState => ({
-    //   page: prevState.page + 1,
-    // }));
     setPage(prevState => prevState + 1)
   };
 
- 
-    // const { totalHits, status, items } = this.state;
     if (status === 'idle') {
       return (
         <div className={css.App}>

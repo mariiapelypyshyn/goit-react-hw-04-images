@@ -4,13 +4,9 @@ import Notiflix from 'notiflix';
 
 const Searchbar = ({onSubmit}) => {
 
-    // state = {
-    //     inputData: '',
-    // }
     const [inputData, setInputData] = useState('');
 
     const onInputChange = e => {
-        // this.setState({ inputData: e.currentTarget.value.toLowerCase() });
         setInputData(e.currentTarget.value.toLowerCase());
     }
   
@@ -22,7 +18,6 @@ const Searchbar = ({onSubmit}) => {
             return;
         }
         onSubmit(inputData);
-        // this.setState({ inputData: ''})
         setInputData('');
     }
     

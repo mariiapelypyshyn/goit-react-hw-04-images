@@ -5,7 +5,6 @@ import React, { useEffect } from 'react';
 const Modal = ({ onClose, image }) => {
   
   useEffect(() => {
-    // console.log('Modal was mounted');
       const keyDown = e => {
     if (e.code === 'Escape') {
       onClose();
