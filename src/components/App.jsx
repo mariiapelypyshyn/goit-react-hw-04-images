@@ -8,13 +8,7 @@ import Loader from './Loader/Loader';
 import css from './App.module.css';
 
 const App = () => {
-  // state = {
-  //   inputData: '',
-  //   items: [],
-  //   page: 1,
-  //   status: 'idle',
-  //   totalHits: 0,
-  // };
+
   const [inputData, setInputData] = useState('');
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
@@ -26,7 +20,11 @@ const App = () => {
     setInputData(inputData);
   }
 
-  const getImgs = async () => {
+  useEffect(() => {
+    if (!inputData)
+      return; 
+    
+    const getImgs = async () => {
     try {
       // this.setState({ status: 'pending' });
       setStatus('pending');
@@ -44,7 +42,7 @@ const App = () => {
       //     totalHits: result.totalHits,
       //   status: 'resolved',
         // }));
-        // setItems(prevState => [...prevState.items, ...result.hits]);
+  
         setItems(prevState => [...prevState, ...result.hits]);
         setTotalHits(result.totalHits);
         setStatus('resolved');
@@ -53,11 +51,8 @@ const App = () => {
       // this.setState({ status: 'rejected' });
        setStatus('rejected');
     }
-  };
-
-  useEffect(() => {
-    if (!inputData)
-    { return; }
+    };
+    
     getImgs();
   }, [inputData, page]);
   // componentDidUpdate(_, prevState) {
